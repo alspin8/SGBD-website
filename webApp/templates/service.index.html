@@ -1,0 +1,40 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<a href="{{ url_for('service.add') }}" class="btn btn-primary">Ajouter un service</a>
+
+<table class="table table-striped table-bordered mx-auto" style="max-width: 900px;margin-top: 5vh;">
+    <thead>
+    <tr>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="text-center">Service</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        {%for service in services%}
+        <tr>
+            <td class="text-center align-middle"> {{ service[0] }} </td>
+            <td class="text-center align-middle"> {{ service[1] }} </td>
+            <td class="text-center">
+                <a href="{{ url_for('service.update', id=service[0]) }}">
+                    <span class="material-icons align-middle text-secondary" >
+                        edit
+                    </span>
+                </a>
+            </td>
+            <td class="text-center">
+                <a href="{{ url_for('service.delete', id=service[0]) }}">
+                    <span class="material-icons align-middle text-secondary" >
+                        delete
+                    </span>
+                </a>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock %}

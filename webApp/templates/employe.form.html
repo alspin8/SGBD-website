@@ -1,0 +1,52 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<form class="row g-3 mx-auto" method="post" style="max-width: 500px;">
+    {% if employe %}
+        <div class="col-12 text-center">
+            <h1>Modifier {{service[1]}}</h1>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Plozevet" value="{{ service[1] }}" required>
+            <label for="floatingInputGrid">Service</label>
+        </div>
+    {% else %}
+        <div class="col-12 text-center">
+            <h1>Nouveau employé</h1>
+        </div>
+        <div class="col-md-6 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Michelle" required>
+            <label for="floatingInputGrid">Nom</label>
+        </div>
+        <div class="col-md-6 form-floating">
+            <input type="text" class="form-control" name="prenom" id="floatingInputGrid" placeholder="Jean" required>
+            <label for="floatingInputGrid">Prénom</label>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="ddn" id="floatingInputGrid" placeholder="23/09/2020" required>
+            <label for="floatingInputGrid">Date de naissance</label>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="adresse" id="floatingInputGrid" placeholder="23/09/2020" required>
+            <label for="floatingInputGrid">Adresse</label>
+        </div>
+        <select class="form-select form-select-lg" aria-label=".form-select-lg example" name="communeId">
+            <option selected>Commune</option>
+            {% for commune in communes %}
+                <option value="{{ commune[0] }}">{{ commune[1] }}</option>
+            {% endfor %}
+        </select>
+        <select class="form-select form-select-lg" aria-label=".form-select-lg example" name="serviceId">
+            <option selected>Service</option>
+            {% for service in services %}
+                <option value="{{ service[0] }}">{{ service[1] }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+    <div class="col-12 text-center">
+        <button class="btn btn-primary" type="submit">Ajouter</button>
+    </div>
+</form>
+
+{% endblock %}

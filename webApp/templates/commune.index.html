@@ -1,0 +1,42 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<a href="{{ url_for('commune.add') }}" class="btn btn-primary">Ajouter une commune</a>
+
+<table class="table table-striped table-bordered mx-auto" style="max-width: 900px;margin-top: 5vh;">
+    <thead>
+    <tr>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="text-center">Commune</th>
+        <th scope="col" class="text-center">Code Postale</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        {%for commune in communes%}
+        <tr>
+            <td class="text-center align-middle"> {{ commune[0] }} </td>
+            <td class="text-center align-middle"> {{ commune[1] }} </td>
+            <td class="text-center align-middle"> {{ commune[2] }} </td>
+            <td class="text-center">
+                <a href="{{ url_for('commune.update', id=commune[0]) }}">
+                    <span class="material-icons align-middle text-secondary" >
+                        edit
+                    </span>
+                </a>
+            </td>
+            <td class="text-center">
+                <a href="{{ url_for('commune.delete', id=commune[0]) }}">
+                    <span class="material-icons align-middle text-secondary" >
+                        delete
+                    </span>
+                </a>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock %}

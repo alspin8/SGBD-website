@@ -1,0 +1,50 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<a href="{{ url_for('employe.add') }}" class="btn btn-primary">Ajouter un employé</a>
+
+<table class="table table-striped table-bordered mx-auto" style="margin-top: 5vh;">
+    <thead>
+    <tr>
+        <th scope="col" class="text-center">ID</th>
+        <th scope="col" class="text-center">Nom</th>
+        <th scope="col" class="text-center">Prénom</th>
+        <th scope="col" class="text-center">Date de naissance</th>
+        <th scope="col" class="text-center">Adresse</th>
+        <th scope="col" class="text-center">Commune</th>
+        <th scope="col" class="text-center">Service</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        {%for employe in employes%}
+        <tr>
+            <td class="text-center align-middle"> {{ employe[0] }} </td>
+            <td class="text-center align-middle"> {{ employe[1] }} </td>
+            <td class="text-center align-middle"> {{ employe[2] }} </td>
+            <td class="text-center align-middle"> {{ employe[3] }} </td>
+            <td class="text-center align-middle"> {{ employe[4] }} </td>
+            <td class="text-center align-middle"> {{ employe[5] }} </td>
+            <td class="text-center align-middle"> {{ employe[6] }} </td>
+            <td class="text-center">
+                <a href="{{ url_for('employe.update', id=employe[0]) }}" aria-disabled="true">
+                    <span class="material-icons align-middle text-secondary" >
+                        edit
+                    </span>
+                </a>
+            </td>
+            <td class="text-center">
+                <a href="{{ url_for('employe.delete', id=employe[0]) }}">
+                    <span class="material-icons align-middle text-secondary" >
+                        delete
+                    </span>
+                </a>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock %}

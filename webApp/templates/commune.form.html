@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<form class="row g-3 mx-auto" method="post" style="max-width: 500px;">
+    {% if commune %}
+        <div class="col-12 text-center">
+            <h1>Modifier {{commune[1]}}</h1>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Plozevet" value="{{ commune[1] }}" required>
+            <label for="floatingInputGrid">Commune</label>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="cdp" id="floatingInputGrid" placeholder="29710" value="{{ commune[2] }}" required>
+            <label for="floatingInputGrid">Code postale</label>
+        </div>
+    {% else %}
+        <div class="col-12 text-center">
+            <h1>Nouvelle commune</h1>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Plozevet" required>
+            <label for="floatingInputGrid">Commune</label>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="cdp" id="floatingInputGrid" placeholder="29710" required>
+            <label for="floatingInputGrid">Code postale</label>
+        </div>
+    {% endif %}
+    <div class="col-12 text-center">
+        <button class="btn btn-primary" type="submit">Ajouter</button>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<form class="row g-3 mx-auto" method="post" style="max-width: 500px;">
+    {% if service %}
+        <div class="col-12 text-center">
+            <h1>Modifier {{service[1]}}</h1>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Plozevet" value="{{ service[1] }}" required>
+            <label for="floatingInputGrid">Service</label>
+        </div>
+    {% else %}
+        <div class="col-12 text-center">
+            <h1>Nouveau service</h1>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Plozevet" required>
+            <label for="floatingInputGrid">Service</label>
+        </div>
+    {% endif %}
+    <div class="col-12 text-center">
+        <button class="btn btn-primary" type="submit">Ajouter</button>
+    </div>
+</form>
+
+{% endblock %}
