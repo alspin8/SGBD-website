@@ -1,13 +1,11 @@
-from crypt import methods
-from db.dataBase import *
+from db.src.requests import *
 from flask import Blueprint, render_template, request, redirect, url_for
 
 commune = Blueprint('commune', __name__)
-table = "Commune"
 
 @commune.route('/')
 def index():
-    communes = lire_all(table)
+    communes = lire_communes()
     return render_template("commune.index.html", communes=communes)
 
 @commune.route('/add', methods=["GET", "POST"])
@@ -23,14 +21,14 @@ def add():
 
 @commune.route('/delete/<id>')
 def delete(id):
-    delete_by_id(table, "communeId", id)
+    delete_commune(id)
     return redirect(url_for('commune.index'))
 
 @commune.route('/update/<id>', methods=["GET", "POST"])
 def update(id):
 
     if request.method == 'GET':
-        updated_commune = lire_by_id(table, "communeId", id)
+        updated_commune = lire_commune(id)
         return render_template("commune.form.html", commune=updated_commune)
         
     elif request.method == "POST":

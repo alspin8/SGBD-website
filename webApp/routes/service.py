@@ -1,12 +1,11 @@
-from db.dataBase import *
+from db.src.requests import *
 from flask import Blueprint, render_template, request, redirect, url_for
 
 service = Blueprint('service', __name__)
-table = "Service"
 
 @service.route('/')
 def index():
-    services = lire_all(table)
+    services = lire_services()
     return render_template("service.index.html", services=services)
 
 @service.route('/add', methods=["GET", "POST"])
@@ -22,14 +21,15 @@ def add():
 
 @service.route('/delete/<id>')
 def delete(id):
-    delete_by_id(table, "serviceId", id)
+    delete_service(id)
     return redirect(url_for('service.index'))
 
 @service.route('/update/<id>', methods=["GET", "POST"])
 def update(id):
 
     if request.method == 'GET':
-        updated_service = lire_by_id(table, "serviceId", id)
+        updated_service = lire_service(id)
+        print(updated_service)
         return render_template("service.form.html", service=updated_service)
         
     elif request.method == "POST":

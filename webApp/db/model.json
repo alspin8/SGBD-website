@@ -1,85 +1,102 @@
-[
-    {
-        "name": "Commune",
-        "cols": [
-            {
-                "name": "communeId",
-                "param": "INTEGER PRIMARY KEY,"
-            },
-            {
-                "name": "nom",
-                "param": "VARCHAR(50),"
-            },
-            {
-                "name": "cdp",
-                "param": "VARCHAR(50)"
-            }
-        ],
-        "constraints": []
-    },
-    {
-        "name": "Employe",
-        "cols": [
-            {
-                "name": "employeId",
-                "param": "INTEGER PRIMARY KEY,"
-            },
-            {
-                "name": "communeId",
-                "param": "INTEGER,"
-            },
-            {
-                "name": "nom",
-                "param": "VARCHAR(50),"
-            },
-            {
-                "name": "prenom",
-                "param": "VARCHAR(50),"
-            },
-            {
-                "name": "ddn",
-                "param": "DATE,"
-            },
-            {
-                "name": "adresse",
-                "param": "VARCHAR(100),"
-            }
-        ],
-        "constraints": [
-            "FOREIGN KEY(communeId) REFERENCES Commune"
-        ]
-    },
-    {
-        "name": "Travailler",
-        "cols": [
-            {
-                "name": "employeId",
-                "param": "INTEGER,"
-            },
-            {
-                "name": "serviceId",
-                "param": "INTEGER,"
-            }
-        ],
-        "constraints": [
-            "FOREIGN KEY(employeId) REFERENCES Employe,",
-            "FOREIGN KEY(serviceId) REFERENCES Service,",
-            "PRIMARY KEY(employeId, serviceId)"
-        ]
-    },
-    {
-        "name": "Service",
-        "cols": [
-            {
-                "name": "serviceId",
-                "param": "INTEGER PRIMARY KEY,"
-            },
-            {
-                "name": "nom",
-                "param": "VARCHAR(50)"
-            }
-        ],
-        "constraints": []
-    }
+{
+    "tables" : 
+    [
+        {
+            "name": "Commune",
+            "cols": [
+                {
+                    "name": "communeId",
+                    "param": "INTEGER PRIMARY KEY,"
+                },
+                {
+                    "name": "nom",
+                    "param": "VARCHAR(50),"
+                },
+                {
+                    "name": "cdp",
+                    "param": "VARCHAR(50)"
+                }
+            ],
+            "constraints": []
+        },
+        {
+            "name": "Employe",
+            "cols": [
+                {
+                    "name": "employeId",
+                    "param": "VARCHAR(100) PRIMARY KEY,"
+                },
+                {
+                    "name": "communeId",
+                    "param": "INTEGER,"
+                },
+                {
+                    "name": "nom",
+                    "param": "VARCHAR(50),"
+                },
+                {
+                    "name": "prenom",
+                    "param": "VARCHAR(50),"
+                },
+                {
+                    "name": "ddn",
+                    "param": "DATE,"
+                },
+                {
+                    "name": "adresse",
+                    "param": "VARCHAR(100),"
+                }
+            ],
+            "constraints": [
+                "FOREIGN KEY(communeId) REFERENCES Commune"
+            ]
+        },
+        {
+            "name": "Travailler",
+            "cols": [
+                {
+                    "name": "employeId",
+                    "param": "VARCHAR(100),"
+                },
+                {
+                    "name": "serviceId",
+                    "param": "INTEGER,"
+                }
+            ],
+            "constraints": [
+                "FOREIGN KEY(employeId) REFERENCES Employe,",
+                "FOREIGN KEY(serviceId) REFERENCES Service,",
+                "PRIMARY KEY(employeId, serviceId)"
+            ]
+        },
+        {
+            "name": "Service",
+            "cols": [
+                {
+                    "name": "serviceId",
+                    "param": "INTEGER PRIMARY KEY,"
+                },
+                {
+                    "name": "nom",
+                    "param": "VARCHAR(50)"
+                }
+            ],
+            "constraints": []
+        }
 
-]
+    ],
+    "views" :
+    [
+        {
+            "name": "Employe_full",
+            "request_line": 
+            [
+                "SELECT Employe.employeId, Employe.nom, Employe.prenom, Employe.ddn, Employe.adresse, Commune.nom, Service.nom FROM Employe",
+                "INNER JOIN Commune ON Employe.communeId=Commune.communeId",
+                "INNER JOIN Travailler ON Employe.employeId=Travailler.employeId",
+                "INNER JOIN Service ON Travailler.serviceId=Service.serviceId",
+                "GROUP BY(Service.nom)"
+            ]
+        }
+    ]
+}

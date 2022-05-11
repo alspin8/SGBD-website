@@ -1,5 +1,5 @@
 from flask import Flask
-from db.dataBase import *
+from db.src.tablesAndViews import *
 
 def create_app():
     app = Flask(__name__)
@@ -21,6 +21,8 @@ def init_tables():
     initialiser()
     creer_tables()
     effacer_tables()
+    supprimer_vues()
+    creer_vues()
     remplir_tables()
 
 if __name__ == "__main__":

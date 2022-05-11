@@ -1,4 +1,4 @@
-from db.dataBase import *
+from db.src.requests import *
 from flask import Blueprint, render_template, request, redirect, url_for
 
 main = Blueprint('main', __name__)
