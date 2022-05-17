@@ -94,8 +94,7 @@
                 "SELECT Employe.employeId, Employe.nom, Employe.prenom, Employe.ddn, Employe.adresse, Commune.nom, Service.nom FROM Employe",
                 "INNER JOIN Commune ON Employe.communeId=Commune.communeId",
                 "INNER JOIN Travailler ON Employe.employeId=Travailler.employeId",
-                "INNER JOIN Service ON Travailler.serviceId=Service.serviceId",
-                "GROUP BY(Service.nom)"
+                "INNER JOIN Service ON Travailler.serviceId=Service.serviceId"
             ]
         }
     ]

@@ -46,11 +46,13 @@ def supprimer_vues():
 #------------------------------------------------------------------------------------------------------#
 
 def remplir_tables():
+    # Ajout des services :
     insert_service("RESSOURCES HUMAINES")
     insert_service("FINANCES ET COMMANDE PUBLIQUE")
     insert_service("AMÉNAGEMENT ET ENVIRONNEMENT TERRITORIAL")
     insert_service("ACTION SOCIALE INTERCOMMUNALE")
 
+    # Ajout des communes
     insert_commune("Plozevet", "29710")
     insert_commune("Gourlizon", "29710")
     insert_commune("Guiler-sur-Goyen", "29710")
@@ -62,10 +64,30 @@ def remplir_tables():
     insert_commune("Plovan", "29720")
     insert_commune("Tréogat", "29720")
 
+    # Ajout des employés
     id = str(shortuuid.uuid()[:12])
-    insert_employe(id, 1, "Alex", "Clorennec", "08/08/2000", "Plozevet")
+    insert_employe(
+        id, 
+        {
+            "communeId": 1,
+            "prenom": "Alex",
+            "nom": "Clorennec",
+            "ddn": "08/08/2000",
+            "adresse": "Plozevet"
+        }
+    )
     insert_travailler(id, 3)
     insert_travailler(id, 4)
+    insert_travailler(id, 1)
     id = str(shortuuid.uuid()[:12])
-    insert_employe(id, 3, "Jean", "Massiet", "01/11/1987", "Douarnenez")
+    insert_employe(
+        id, 
+        {
+            "communeId": 3,
+            "prenom": "Jean",
+            "nom": "Massiet",
+            "ddn": "01/11/1987",
+            "adresse": "Douarnenz"
+        }
+    )
     insert_travailler(id, 1)

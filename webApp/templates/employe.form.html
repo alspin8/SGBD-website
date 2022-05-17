@@ -4,17 +4,76 @@
 
 <form class="row g-3 mx-auto" method="post" style="max-width: 500px;">
     {% if employe %}
-        <div class="col-12 text-center">
+        <!-- <div class="col-12 text-center">
             <h1>Modifier {{employe[0]}}</h1>
         </div>
         <div class="col-md-12 form-floating">
             <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Plozevet" value="{{ employe[1] }}" required>
             <label for="floatingInputGrid">Service</label>
+        </div> -->
+        <div class="col-12 text-center">
+            <h3>Modifier l'employé {{employe[0]}}</h3>
+        </div>
+        {% with message = get_flashed_messages() %}
+            {% if message %}
+                <div class="col-12 text-center alert alert-danger" role="alert">
+                    {{ message[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="col-md-6 form-floating">
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Michelle" value="{{ employe[1] }}" required>
+            <label for="floatingInputGrid">Nom</label>
+        </div>
+        <div class="col-md-6 form-floating">
+            <input type="text" class="form-control" name="prenom" id="floatingInputGrid" placeholder="Jean" value="{{ employe[2] }}" required>
+            <label for="floatingInputGrid">Prénom</label>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="ddn" id="floatingInputGrid" placeholder="23/09/2020" value="{{ employe[3] }}" required>
+            <label for="floatingInputGrid">Date de naissance</label>
+        </div>
+        <div class="col-md-12 form-floating">
+            <input type="text" class="form-control" name="adresse" id="floatingInputGrid" placeholder="23/09/2020" value="{{ employe[4] }}" required>
+            <label for="floatingInputGrid">Adresse</label>
+        </div>
+        <div>
+            <div class="col-md-12 form-control px-0">
+                <select class="selectpicker show-tick col-md-12" name="communeId" title="Choisir une commune" data-style="btn-white" data-live-search="true">
+                    {% for commune in communes %}
+                        {% if commune[1] == employe[5] %}
+                            <option value="{{ commune[0] }}" selected>{{ commune[1] }}</option>
+                        {% else %}
+                            <option value="{{ commune[0] }}">{{ commune[1] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12 form-control px-0">
+                <select class="selectpicker col-md-12" name="serviceId" title="Choisir un ou plusieurs service" data-style="btn-white" data-live-search="true" data-actions-box="true" multiple>
+                    {% for service in services %}
+                        {% for employe_service in employe[6] %}
+                            {% if employe_service == service[1] %}
+                                <option value="{{ service[0] }}" selected>{{ service[1] }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     {% else %}
         <div class="col-12 text-center">
             <h1>Nouveau employé</h1>
         </div>
+        {% with message = get_flashed_messages() %}
+            {% if message %}
+                <div class="col-12 text-center alert alert-danger" role="alert">
+                    {{ message[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
         <div class="col-md-6 form-floating">
             <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Michelle" required>
             <label for="floatingInputGrid">Nom</label>
@@ -31,21 +90,24 @@
             <input type="text" class="form-control" name="adresse" id="floatingInputGrid" placeholder="23/09/2020" required>
             <label for="floatingInputGrid">Adresse</label>
         </div>
-        <div class="col-md-12">
-            <select class="form-select" name="communeId">
-                <!-- <option selected>Commune</option> -->
-                {% for commune in communes %}
-                    <option value="{{ commune[0] }}">{{ commune[1] }}</option>
-                {% endfor %}
-            </select>
+        <div>
+            <div class="col-md-12 form-control px-0">
+                <select class="selectpicker show-tick col-md-12" name="communeId" title="Choisir une commune" data-style="btn-white" data-live-search="true">
+                    {% for commune in communes %}
+                        <option value="{{ commune[0] }}">{{ commune[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-        <div class="col-md-12">
-            <select class="form-select" name="serviceId">
-                <option selected>Service</option>
-                {% for service in services %}
-                    <option value="{{ service[0] }}">{{ service[1] }}</option>
-                {% endfor %}
-            </select>
+        <div>
+            <div class="col-md-12 form-control px-0">
+                <select class="form-select col-md-12" name="serviceId[]" title="Choisir un ou plusieurs service" 
+                 data-style="btn-white" data-live-search="true" data-actions-box="true" multiple>
+                    {% for service in services %}
+                        <option value="{{ service[0] }}">{{ service[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
     {% endif %}
     <div class="col-12 text-center">

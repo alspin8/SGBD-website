@@ -11,6 +11,9 @@ def lire_all(table:str):
 def lire_by_id(table:str, tag:str, id:int):
     return r_requete(f"SELECT * FROM {table} WHERE {tag}=?", (id,))[0]
 
+def lire_list_by_id(table:str, tag:str, id:int):
+    return r_requete(f"SELECT * FROM {table} WHERE {tag}=?", (id,))
+
 def delete_by_id(table:str, tag:str, id:int):
     w_requete(f"DELETE FROM {table} WHERE {tag}=?",(id,))
 
@@ -34,17 +37,20 @@ def lire_communes(): return lire_all("Commune")
 #                                     Actions sur la table employe                                     #
 #------------------------------------------------------------------------------------------------------#
 
-def insert_employe(employeId:int, communeId:int, nom:str, prenom:str, ddn, adresse:str):
+def insert_employe(new_employeId, new_employe):
     w_requete("INSERT INTO Employe (employeId, communeId, nom, prenom, ddn, adresse) VALUES (?, ?, ?, ?, ?, ?)", 
-        (employeId, communeId, nom, prenom, ddn, adresse))
+        (new_employeId, new_employe['communeId'], new_employe['nom'], new_employe['prenom'], new_employe['ddn'], new_employe['adresse']))
 
-def update_employe(employeId, communeId:int, nom:str, prenom:str, ddn, adresse:str):
+def update_employe(updated_employeId, updated_employe):
     w_requete("UPDATE Employe SET communeId=?, nom=?, prenom=?, ddn=?, adresse=? WHERE employeId=?;"
-        (communeId, nom, prenom, ddn, adresse, employeId))
+        (updated_employe['communeId'], updated_employe['nom'], updated_employe['prenom']
+            , updated_employe['ddn'], updated_employe['adresse'], updated_employeId))
 
 def delete_employe(id): delete_by_id("Employe", "employeId", id)
 
-def lire_employe(id): return lire_by_id("Employe_full", "employeId", id)
+def lire_employe_full(id): return lire_list_by_id("Employe_full", "employeId", id)
+
+def lire_employe(id): return lire_by_id("Employe", "employeId", id)
 
 def lire_employes(): return lire_all("Employe_full")
 
@@ -52,11 +58,16 @@ def lire_employes(): return lire_all("Employe_full")
 #                                    Actions sur la table travailler                                   #
 #------------------------------------------------------------------------------------------------------#
 
-def insert_travailler(employeId:int, serviceId:int):
-    w_requete("INSERT INTO Travailler (employeId, serviceId) VALUES (?, ?)", (employeId, serviceId))
+def insert_travailler(employeId, serviceId):
+    try:
+        w_requete("INSERT INTO Travailler (employeId, serviceId) VALUES (?, ?)", (employeId, serviceId))
+    except sql.IntegrityError as err:
+        print(err)
+        return err
 
-def update_travailler(employeId, serviceId, new_serviceId):
-    w_requete("UPDATE Travailler SET serviceId=? WHERE employeId=? AND serviceId=?", (new_serviceId, employeId, serviceId))
+def update_travailler(old_employe, updated_employe):
+    w_requete("UPDATE Travailler SET serviceId=? WHERE employeId=? AND serviceId=?", (updated_employe['serviceId']
+        , old_employe["employeId"], old_employe["serviceId"]))
 
 
 #------------------------------------------------------------------------------------------------------#
