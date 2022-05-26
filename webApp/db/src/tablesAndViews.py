@@ -39,7 +39,8 @@ def creer_vues():
         w_requete(view_description(view))
 
 def supprimer_vues():
-    w_requete('''DROP VIEW IF EXISTS Employe_full;''')
+    for view in views:
+        w_requete(f"DROP VIEW IF EXISTS {view['name']};")
 
 #------------------------------------------------------------------------------------------------------#
 #                                        Remplissage des tables                                        #
@@ -47,10 +48,11 @@ def supprimer_vues():
 
 def remplir_tables():
     # Ajout des services :
-    insert_service("RESSOURCES HUMAINES")
-    insert_service("FINANCES ET COMMANDE PUBLIQUE")
-    insert_service("AMÉNAGEMENT ET ENVIRONNEMENT TERRITORIAL")
-    insert_service("ACTION SOCIALE INTERCOMMUNALE")
+    insert_service("Ressources Humaines")
+    insert_service("Finance et Commande Publique")
+    insert_service("Aménagement et Environnement")
+    insert_service("Action Sociale et Intercommunale")
+    insert_service("Informatique")
 
     # Ajout des communes
     insert_commune("Plozevet", "29710")
@@ -79,6 +81,7 @@ def remplir_tables():
     insert_travailler(id, 3)
     insert_travailler(id, 4)
     insert_travailler(id, 1)
+
     id = str(shortuuid.uuid()[:12])
     insert_employe(
         id, 
@@ -87,7 +90,91 @@ def remplir_tables():
             "prenom": "Jean",
             "nom": "Massiet",
             "ddn": "01/11/1987",
-            "adresse": "Douarnenz"
+            "adresse": "Douarnenez"
         }
     )
     insert_travailler(id, 1)
+
+    id = str(shortuuid.uuid()[:12])
+    insert_employe(
+        id, 
+        {
+            "communeId": 7,
+            "prenom": "Jean",
+            "nom": "Todt",
+            "ddn": "26/06/1962",
+            "adresse": "Pouldrezic"
+        }
+    )
+    insert_travailler(id, 4)
+    insert_travailler(id, 5)
+
+    id = str(shortuuid.uuid()[:12])
+    insert_employe(
+        id, 
+        {
+            "communeId": 3,
+            "prenom": "ObiWan",
+            "nom": "Kenobi",
+            "ddn": "18/02/1969",
+            "adresse": "Plozevet"
+        }
+    )
+    insert_travailler(id, 4)
+
+    id = str(shortuuid.uuid()[:12])
+    insert_employe(
+        id, 
+        {
+            "communeId": 10,
+            "prenom": "Jammi",
+            "nom": "Lanister",
+            "ddn": "02/04/1985",
+            "adresse": "Quimper"
+        }
+    )
+    insert_travailler(id, 2)
+
+    id = str(shortuuid.uuid()[:12])
+    insert_employe(
+        id, 
+        {
+            "communeId": 5,
+            "prenom": "John",
+            "nom": "Snow",
+            "ddn": "29/05/1990",
+            "adresse": "Peumerit"
+        }
+    )
+    insert_travailler(id, 5)
+
+    id = str(shortuuid.uuid()[:12])
+    insert_employe(
+        id, 
+        {
+            "communeId": 3,
+            "prenom": "Compte",
+            "nom": "Doku",
+            "ddn": "02/11/1966",
+            "adresse": "Plonéour-Lanvern"
+        }
+    )
+    insert_travailler(id, 5)
+    insert_travailler(id, 3)
+
+    id = str(shortuuid.uuid()[:12])
+    insert_employe(
+        id, 
+        {
+            "communeId": 8,
+            "prenom": "Mace",
+            "nom": "Winduw",
+            "ddn": "16/09/1979",
+            "adresse": "Plonéour-Lanvern"
+        }
+    )
+    insert_travailler(id, 1)
+    insert_travailler(id, 2)
+    insert_travailler(id, 3)
+    insert_travailler(id, 4)
+    insert_travailler(id, 5)

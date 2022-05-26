@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form class="row g-3 mx-auto" method="post" style="max-width: 500px;">
+<form class="row g-3 mx-auto" method="post" style="max-width: 500px;" onsubmit="servicesPost()">
     {% if employe %}
         <!-- <div class="col-12 text-center">
             <h1>Modifier {{employe[0]}}</h1>
@@ -22,26 +22,30 @@
             {% endif %}
         {% endwith %}
         <div class="col-md-6 form-floating">
-            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Michelle" value="{{ employe[1] }}" required>
+            <input type="text" class="form-control" name="nom" id="floatingInputGrid" placeholder="Michelle" value="{{ employe[2] }}" required>
             <label for="floatingInputGrid">Nom</label>
         </div>
         <div class="col-md-6 form-floating">
-            <input type="text" class="form-control" name="prenom" id="floatingInputGrid" placeholder="Jean" value="{{ employe[2] }}" required>
+            <input type="text" class="form-control" name="prenom" id="floatingInputGrid" placeholder="Jean" value="{{ employe[3] }}" required>
             <label for="floatingInputGrid">Prénom</label>
         </div>
-        <div class="col-md-12 form-floating">
-            <input type="text" class="form-control" name="ddn" id="floatingInputGrid" placeholder="23/09/2020" value="{{ employe[3] }}" required>
-            <label for="floatingInputGrid">Date de naissance</label>
+        <div class="col-md-12">
+            <div class='input-group' style="height: 3.5em;" id='viewMode' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                <input id='viewModeInput' name="ddn" type='text' class='form-control' data-td-target='#viewMode' value="{{ employe[4] }}"/>
+                <span class='input-group-text' data-td-target='#viewMode' data-td-toggle='datetimepicker'>
+                    <span class='fa-solid fa-calendar'></span>
+                </span>
+            </div>
         </div>
         <div class="col-md-12 form-floating">
-            <input type="text" class="form-control" name="adresse" id="floatingInputGrid" placeholder="23/09/2020" value="{{ employe[4] }}" required>
+            <input type="text" class="form-control" name="adresse" id="floatingInputGrid" placeholder="23/09/2020" value="{{ employe[5] }}" required>
             <label for="floatingInputGrid">Adresse</label>
         </div>
         <div>
             <div class="col-md-12 form-control px-0">
                 <select class="selectpicker show-tick col-md-12" name="communeId" title="Choisir une commune" data-style="btn-white" data-live-search="true">
                     {% for commune in communes %}
-                        {% if commune[1] == employe[5] %}
+                        {% if commune[0] == employe[1] %}
                             <option value="{{ commune[0] }}" selected>{{ commune[1] }}</option>
                         {% else %}
                             <option value="{{ commune[0] }}">{{ commune[1] }}</option>
@@ -52,16 +56,20 @@
         </div>
         <div>
             <div class="col-md-12 form-control px-0">
-                <select class="selectpicker col-md-12" name="serviceId" title="Choisir un ou plusieurs service" data-style="btn-white" data-live-search="true" data-actions-box="true" multiple>
+                <select class="selectpicker col-md-12" id="services" title="Choisir un ou plusieurs service" data-style="btn-white" data-live-search="true" data-actions-box="true" multiple>
                     {% for service in services %}
-                        {% for employe_service in employe[6] %}
-                            {% if employe_service == service[1] %}
-                                <option value="{{ service[0] }}" selected>{{ service[1] }}</option>
-                            {% endif %}
-                        {% endfor %}
+                        {% if service[0] in employe[6] %}
+                            <option value="{{ service[0] }}" selected>{{ service[1] }}</option>
+                        {% else %}
+                            <option value="{{ service[0] }}">{{ service[1] }}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>
+        </div>
+        <input type="hidden" name="serviceIds" id="services_hidden">
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" type="submit">Sauvegarder</button>
         </div>
     {% else %}
         <div class="col-12 text-center">
@@ -82,9 +90,13 @@
             <input type="text" class="form-control" name="prenom" id="floatingInputGrid" placeholder="Jean" required>
             <label for="floatingInputGrid">Prénom</label>
         </div>
-        <div class="col-md-12 form-floating">
-            <input type="text" class="form-control" name="ddn" id="floatingInputGrid" placeholder="23/09/2020" required>
-            <label for="floatingInputGrid">Date de naissance</label>
+        <div class="col-md-12">
+            <div class='input-group' style="height: 3.5em;" id='viewMode' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+                <input id='viewModeInput' name="ddn" type='text' class='form-control' data-td-target='#viewMode'/>
+                <span class='input-group-text' data-td-target='#viewMode' data-td-toggle='datetimepicker'>
+                    <span class='fa-solid fa-calendar'></span>
+                </span>
+            </div>
         </div>
         <div class="col-md-12 form-floating">
             <input type="text" class="form-control" name="adresse" id="floatingInputGrid" placeholder="23/09/2020" required>
@@ -100,19 +112,35 @@
             </div>
         </div>
         <div>
-            <div class="col-md-12 form-control px-0">
-                <select class="form-select col-md-12" name="serviceId[]" title="Choisir un ou plusieurs service" 
-                 data-style="btn-white" data-live-search="true" data-actions-box="true" multiple>
+            <div class="col-md-12 form-control px-0 service">
+                <select class="selectpicker col-md-12" id="services" title="Choisir un ou plusieurs service" data-style="btn-white" data-live-search="true" data-actions-box="true" multiple multiple="multiple">
                     {% for service in services %}
                         <option value="{{ service[0] }}">{{ service[1] }}</option>
                     {% endfor %}
                 </select>
             </div>
         </div>
+        <input type="hidden" name="serviceIds" id="services_hidden">
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" type="submit">Ajouter</button>
+        </div>
     {% endif %}
-    <div class="col-12 text-center">
-        <button class="btn btn-primary" type="submit">Ajouter</button>
-    </div>
 </form>
+
+<script>
+    new tempusDominus.TempusDominus(document.getElementById('viewMode'), {
+        display: {
+            components: {
+                clock: "False"
+            },
+            viewMode: 'months'
+        }
+    });
+
+    const servicesPost = () => {
+    	let serviceIds = $('#services').val();
+    	$('#services_hidden').val(serviceIds);
+    }
+</script>
 
 {% endblock %}

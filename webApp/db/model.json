@@ -96,6 +96,44 @@
                 "INNER JOIN Travailler ON Employe.employeId=Travailler.employeId",
                 "INNER JOIN Service ON Travailler.serviceId=Service.serviceId"
             ]
+        },
+        {
+            "name": "NomServiceNbEmploye",
+            "request_line": 
+            [
+                "SELECT Service.nom, COUNT(Travailler.employeId) AS nbEmploye FROM Service",
+                "LEFT JOIN Travailler ON Service.serviceId=Travailler.serviceId",
+                "GROUP BY(Service.nom)",
+                "ORDER BY(nbEmploye) DESC"
+            ]
+        },
+        {
+            "name": "NomCommuneNbEmploye",
+            "request_line": 
+            [
+                "SELECT Commune.nom, COUNT(Employe.employeId) as nbEmploye FROM Commune",
+                "LEFT JOIN Employe ON Commune.communeId=Employe.communeId",
+                "GROUP BY(Commune.nom)",
+                "ORDER BY(nbEmploye) DESC"
+            ]
+        },
+        {
+            "name": "EmployeIdNbService",
+            "request_line":
+            [
+                "SELECT Travailler.employeId, COUNT(Travailler.serviceId) AS nbService FROM Travailler",
+                "GROUP BY(Travailler.employeId)",
+                "ORDER BY(nbService) DESC"
+            ]
+        },
+        {
+            "name": "EmployeIdAge",
+            "request_line": 
+            [
+                "SELECT  employeId, (2022 - substr(ddn, 7)) AS age FROM Employe",
+                "ORDER BY(age) DESC"
+
+            ]
         }
     ]
 }

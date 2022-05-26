@@ -1,0 +1,55 @@
+{% extends "template.html" %}
+
+{% block content %}
+
+<h3 class="text-center mb-5">Statistiques</h3>
+
+<div class="accordion accordion-flush" id="statistique-accordion">
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading-employe">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapse-employe" aria-expanded="false" aria-controls="flush-collapse-employe">
+                Employés
+            </button>
+        </h2>
+        <div id="flush-collapse-employe" class="accordion-collapse collapse" aria-labelledby="flush-heading-employe"
+            data-bs-parent="#statistique-accordion">
+            <div class="accordion-body">
+                {% include "stats/stats.employe.html" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading-commune">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapse-commune" aria-expanded="false" aria-controls="flush-collapse-commune">
+                Communes
+            </button>
+        </h2>
+        <div id="flush-collapse-commune" class="accordion-collapse collapse" aria-labelledby="flush-heading-commune"
+            data-bs-parent="#statistique-accordion">
+            <div class="accordion-body">
+                {% include "stats/stats.commune.html" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading-service">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapse-service" aria-expanded="false" aria-controls="flush-collapse-service">
+                Services
+            </button>
+        </h2>
+        <div id="flush-collapse-service" class="accordion-collapse collapse" aria-labelledby="flush-heading-service"
+            data-bs-parent="#statistique-accordion">
+            <div class="accordion-body">
+                {% include "stats/stats.service.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

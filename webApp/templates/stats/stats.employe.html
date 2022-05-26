@@ -1,0 +1,19 @@
+<div class="container">
+
+    {% for dict in stats['employe'] %}
+        <h5 class="text-center my-3"> {{ dict['title'] }} </h5>
+        <div class="row justify-content-md-center">
+            {% for item in dict['cards'] %}
+                <div class="col-md-3">        
+                    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                        <div class="card-header text-center"> {{ item['description'] }} </div>
+                        <div class="card-body">
+                            <p class="card-text text-center"> {{ item['value'] }} </p>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+</div>

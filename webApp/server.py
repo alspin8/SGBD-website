@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask
 from db.src.tablesAndViews import *
 
@@ -14,6 +15,8 @@ def create_app():
     app.register_blueprint(commune, url_prefix='/commune')
     from routes.employe import employe
     app.register_blueprint(employe, url_prefix='/employe')
+    from routes.stats import stats
+    app.register_blueprint(stats, url_prefix='/stats')
 
     return app
 

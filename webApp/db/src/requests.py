@@ -42,13 +42,17 @@ def insert_employe(new_employeId, new_employe):
         (new_employeId, new_employe['communeId'], new_employe['nom'], new_employe['prenom'], new_employe['ddn'], new_employe['adresse']))
 
 def update_employe(updated_employeId, updated_employe):
-    w_requete("UPDATE Employe SET communeId=?, nom=?, prenom=?, ddn=?, adresse=? WHERE employeId=?;"
+    w_requete("UPDATE Employe SET communeId=?, nom=?, prenom=?, ddn=?, adresse=? WHERE employeId=?;",
         (updated_employe['communeId'], updated_employe['nom'], updated_employe['prenom']
             , updated_employe['ddn'], updated_employe['adresse'], updated_employeId))
 
-def delete_employe(id): delete_by_id("Employe", "employeId", id)
+def delete_employe(id): 
+    delete_by_id("Employe", "employeId", id)
+    delete_by_id("Travailler", "employeId", id)
 
 def lire_employe_full(id): return lire_list_by_id("Employe_full", "employeId", id)
+
+def lire_employe_services(id): return lire_travailler_by_employeId(id)
 
 def lire_employe(id): return lire_by_id("Employe", "employeId", id)
 
@@ -65,13 +69,20 @@ def insert_travailler(employeId, serviceId):
         print(err)
         return err
 
-def update_travailler(old_employe, updated_employe):
-    w_requete("UPDATE Travailler SET serviceId=? WHERE employeId=? AND serviceId=?", (updated_employe['serviceId']
-        , old_employe["employeId"], old_employe["serviceId"]))
+def delete_travailler(employeId, serviceId):
+    w_requete(f"DELETE FROM Travailler WHERE employeId=? AND serviceId=?",(employeId, serviceId))
+
+def update_travailler(id, travailler_to_add, travailler_to_del):
+    for t_del in travailler_to_del:
+        delete_travailler(id, t_del)
+    for t_add in travailler_to_add:
+        insert_travailler(id, t_add)
+        
+def lire_travailler_by_employeId(id): return lire_list_by_id("Travailler", "employeId", id)
 
 
 #------------------------------------------------------------------------------------------------------#
-#                                    Actions sur la table service                                   #
+#                                    Actions sur la table service                                      #
 #------------------------------------------------------------------------------------------------------#
 
 def insert_service(nom:str):
