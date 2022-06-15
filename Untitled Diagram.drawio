@@ -1,17 +1,59 @@
-<mxfile host="app.diagrams.net" modified="2022-06-15T07:46:29.435Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="DtQ4W43ipE3vlUuOqkXu" version="20.0.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-06-15T07:50:42.873Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="1xo0usDjv_iv06Xny97K" version="20.0.1" type="github">
   <diagram name="Page-1" id="9f46799a-70d6-7492-0946-bef42562c5a5">
     <mxGraphModel dx="1221" dy="681" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="tziretnfEbDCHHZD1zGT-1" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Commune&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;communeId&lt;/td&gt;&lt;td&gt;INTEGER PK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;nom&lt;/td&gt;&lt;td&gt;VARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;cdp&lt;/td&gt;&lt;td&gt;VARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;" vertex="1" parent="1">
-          <mxGeometry x="100" y="130" width="180" height="70" as="geometry" />
+          <mxGeometry x="178" y="137" width="180" height="70" as="geometry" />
         </mxCell>
         <mxCell id="tziretnfEbDCHHZD1zGT-2" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Employe&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;employeId&lt;/td&gt;&lt;td&gt;INTEGER PK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;communeId&lt;/td&gt;&lt;td&gt;INTEGER&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;serviceId&lt;/td&gt;&lt;td&gt;INTEGER&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;nom&lt;/td&gt;&lt;td&gt;VARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;prenom&lt;/td&gt;&lt;td&gt;VARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;ddn&lt;/td&gt;&lt;td&gt;DATE&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;adresse&lt;/td&gt;&lt;td&gt;VARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;" vertex="1" parent="1">
           <mxGeometry x="481" y="120" width="200" height="140" as="geometry" />
         </mxCell>
         <mxCell id="tziretnfEbDCHHZD1zGT-3" value="&lt;div style=&quot;box-sizing:border-box;width:100%;background:#e4e4e4;padding:2px;&quot;&gt;Service&lt;/div&gt;&lt;table style=&quot;width:100%;font-size:1em;&quot; cellpadding=&quot;2&quot; cellspacing=&quot;0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;serviceId&lt;/td&gt;&lt;td&gt;INTEGER PK&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;nom&lt;/td&gt;&lt;td&gt;VARCHAR(50)&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;" vertex="1" parent="1">
-          <mxGeometry x="800" y="160" width="180" height="50" as="geometry" />
+          <mxGeometry x="800" y="156" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-8" value="" style="endArrow=none;html=1;rounded=0;startArrow=none;" edge="1" parent="1" source="tziretnfEbDCHHZD1zGT-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="164" as="sourcePoint" />
+            <mxPoint x="480" y="164" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-9" value="" style="endArrow=none;html=1;rounded=0;startArrow=none;" edge="1" parent="1" source="tziretnfEbDCHHZD1zGT-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="681" y="181.41" as="sourcePoint" />
+            <mxPoint x="800" y="181" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-12" value="" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="790" y="176" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-16" value="" style="endArrow=none;html=1;rounded=0;startArrow=none;" edge="1" parent="1" source="tziretnfEbDCHHZD1zGT-17" target="tziretnfEbDCHHZD1zGT-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="681" y="181.40999999999997" as="sourcePoint" />
+            <mxPoint x="800" y="180.9999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-17" value="" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="681" y="176" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-18" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" target="tziretnfEbDCHHZD1zGT-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="681" y="181.40999999999997" as="sourcePoint" />
+            <mxPoint x="790" y="181.01798245614032" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-19" value="" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="471" y="159" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-20" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" target="tziretnfEbDCHHZD1zGT-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="164" as="sourcePoint" />
+            <mxPoint x="480" y="164" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tziretnfEbDCHHZD1zGT-21" value="&lt;u&gt;1&lt;/u&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="358" y="139" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
